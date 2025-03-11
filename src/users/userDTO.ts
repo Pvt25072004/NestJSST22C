@@ -3,9 +3,9 @@ import { IsEmail } from 'class-validator';
 
 export class UserDTO {
   // eslint-disable-next-line @typescript-eslint/no-unsafe-call
-  @IsEmail()
-  name: string;
 
+  name: string;
+  // @IsEmail()
   email: string;
   age: number;
   status: boolean;

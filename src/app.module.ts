@@ -4,10 +4,22 @@ import { AppService } from './app.service';
 import { ProductsController } from './products/products.controller';
 import { MongooseModule } from '@nestjs/mongoose';
 import { UsersModule } from './users/users.module';
+import { TypeOrmModule } from '@nestjs/typeorm';
+import { Product } from './products/product.entity';
+import { ProductsModule } from './products/products.module';
 // provide controllers in module
 @Module({
-  imports: [MongooseModule.forRoot('mongodb://127.0.0.1:27017/demonestjs'), UsersModule],
-  controllers: [AppController, ProductsController],
+  imports: [TypeOrmModule.forRoot({
+    type: 'mysql',
+    host: 'localhost',
+    port: 3306,
+    username: 'root',
+    password: 'Pvt@2507',
+    database: 'test_db_nestjs',
+    entities: [Product],
+    synchronize: true,
+  }), ProductsModule],
+  controllers: [AppController],
   providers: [AppService],
 })
 export class AppModule {}
