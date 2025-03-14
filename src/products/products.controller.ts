@@ -1,3 +1,4 @@
+import { CategoryService } from './../category/category.service';
 import { Body, Controller, Delete, Get, Param, ParseIntPipe, Post, Put, Render } from '@nestjs/common';
 import { ProductsService } from './products.service';
 
@@ -10,9 +11,10 @@ export interface ProductParams {
 @Controller('products')
 export class ProductsController {
 
-  constructor(private productService: ProductsService){}
+  constructor(private productService: ProductsService, private categoryService: CategoryService){}
   @Get('')
   async index(){
+    // const category = await this.categoryService.getOne;
     const products = await this.productService.getAll()
     return { message: 'Get success data!!!', data: products };
   }
