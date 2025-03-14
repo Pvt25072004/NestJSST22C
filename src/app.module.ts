@@ -7,6 +7,9 @@ import { UsersModule } from './users/users.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Product } from './products/product.entity';
 import { ProductsModule } from './products/products.module';
+import { Category } from './category/category.entity';
+import { CategoryService } from './category/category.service';
+import { CategoryModule } from './category/category.module';
 // provide controllers in module
 @Module({
   imports: [TypeOrmModule.forRoot({
@@ -16,9 +19,9 @@ import { ProductsModule } from './products/products.module';
     username: 'root',
     password: 'Pvt@2507',
     database: 'test_db_nestjs',
-    entities: [Product],
+    entities: [Product, Category],
     synchronize: true,
-  }), ProductsModule],
+  }), ProductsModule, CategoryModule],
   controllers: [AppController],
   providers: [AppService],
 })
