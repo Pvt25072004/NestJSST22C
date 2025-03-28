@@ -53,5 +53,5 @@ export class ProductsController {
     // // createProduct(@Req() req: Request)
     // // @Body() createProductDto
     // createProduct() {
-    //   return { message: 'Product created!' };
+    //   return { message: 'Product created! hi guy' };
     // }
