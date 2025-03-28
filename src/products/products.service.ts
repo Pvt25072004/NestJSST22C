@@ -4,12 +4,13 @@ import { Repository } from 'typeorm';
 import { Product } from './product.entity';
 // import { ProductParams } from './products.controller';
 import { ProductDTO } from './productDTO';
+import { CategoryService } from 'src/category/category.service';
 
 @Injectable()
 export class ProductsService {
     constructor(
         @InjectRepository(Product)
-        private productRepository: Repository<Product>, ){};
+        private productRepository: Repository<Product>, private categoryService: CategoryService){};
 
     getAll(): Promise<Product[]> {
         return this.productRepository.find({
@@ -24,12 +25,14 @@ export class ProductsService {
     getDetail(id: number){
         return this.productRepository.findOneBy({id});
     }
-    createProduct(params: ProductDTO){
+    async createProduct(params: ProductDTO){
+        const category = await this.categoryService.getOneById(1)
         const productNew = new Product();
         productNew.name = params.name;
         productNew.description = params.description;
         productNew.quantity = params.quantity;
         productNew.price = params.price;
+        productNew.category = category;
         return this.productRepository.save(productNew);
     }
     async updateProduct(id: number, params: ProductDTO) {

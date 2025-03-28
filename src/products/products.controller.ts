@@ -26,8 +26,8 @@ export class ProductsController {
   }
   @Post('/')
   async create(@Body() body: ProductDTO){
-      const product = await this.productService.createProduct(body)
-      return { message: 'Create success data!!!', data:product}
+    const product = await this.productService.createProduct(body)
+    return { message: 'Create success data!!!', data:product}
   }
   @Put('/:id')
   async update(@Param("id") id: number, @Body() body: ProductDTO){

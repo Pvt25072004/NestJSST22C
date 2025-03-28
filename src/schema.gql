@@ -13,14 +13,23 @@ type Product {
   id: Int!
   name: String!
   description: String!
-  image: String!
   price: Float!
-  quantity: Float!
-  status: Boolean!
+  quantity: String!
   category: Category!
 }
 
 type Query {
-  getAllCategory: [Category!]!
   getAllProducts: [Product!]!
+  getProductById(id: Float!): Product!
+  getAllCategory: [Category!]!
+  getCategoryById(id: Float!): Category!
+}
+
+type Mutation {
+  createProduct(name: String!, price: Float!): Product!
+  deleteProduct(id: Float!): Product!
+  updateProduct(id: Float!, name: String!, description: String!, price: Float!, quantity: String!, category: Float!): Product!
+  createCategory(name: String!, description: String!): Category!
+  deleteCategory(id: Float!): Category!
+  updateCategory(id: Float!, name: String!, description: String!): Category!
 }
