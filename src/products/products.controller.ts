@@ -1,13 +1,14 @@
 import { CategoryService } from './../category/category.service';
 import { Body, Controller, Delete, Get, Param, ParseIntPipe, Post, Put, Render } from '@nestjs/common';
 import { ProductsService } from './products.service';
+import { ProductDTO } from './productDTO';
 
-export interface ProductParams {
-  name: string;
-  description: string;
-  price: number;
-  quantity: string;
-}
+// export interface ProductParams {
+//   name: string;
+//   description: string;
+//   price: number;
+//   quantity: string;
+// }
 @Controller('products')
 export class ProductsController {
 
@@ -24,12 +25,12 @@ export class ProductsController {
     return { message: 'Get success data detail !!!', data: product };
   }
   @Post('/')
-  async create(@Body() body: ProductParams){
+  async create(@Body() body: ProductDTO){
       const product = await this.productService.createProduct(body)
       return { message: 'Create success data!!!', data:product}
   }
   @Put('/:id')
-  async update(@Param("id") id: number, @Body() body: ProductParams){
+  async update(@Param("id") id: number, @Body() body: ProductDTO){
     await this.productService.updateProduct(id, body)
     return { message: 'Update success data!!!' }
   }

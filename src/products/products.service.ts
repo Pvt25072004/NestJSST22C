@@ -2,7 +2,8 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Product } from './product.entity';
-import { ProductParams } from './products.controller';
+// import { ProductParams } from './products.controller';
+import { ProductDTO } from './productDTO';
 
 @Injectable()
 export class ProductsService {
@@ -16,7 +17,7 @@ export class ProductsService {
     getDetail(id: number){
         return this.productRepository.findOneBy({id});
     }
-    createProduct(params: ProductParams){
+    createProduct(params: ProductDTO){
         const productNew = new Product();
         productNew.name = params.name;
         productNew.description = params.description;
@@ -24,7 +25,7 @@ export class ProductsService {
         productNew.price = params.price;
         return this.productRepository.save(productNew);
     }
-    async updateProduct(id: number, params: ProductParams) {
+    async updateProduct(id: number, params: ProductDTO) {
         const productUpdate = await this.productRepository.findOne({ where: { id } });
         if (!productUpdate) {
             throw new Error(`Not found`);
