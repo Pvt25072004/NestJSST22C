@@ -11,9 +11,16 @@ export class ProductsService {
         @InjectRepository(Product)
         private productRepository: Repository<Product>, ){};
 
-    getAll():Promise <Product[]>{
-        return this.productRepository.find();
-    }
+    getAll(): Promise<Product[]> {
+        return this.productRepository.find({
+            relations: {
+            category: true,
+            },
+        });
+        }
+    // getAll():Promise <Product[]>{
+    //     return this.productRepository.find();
+    // }
     getDetail(id: number){
         return this.productRepository.findOneBy({id});
     }

@@ -10,6 +10,9 @@ import { ProductsModule } from './products/products.module';
 import { Category } from './category/category.entity';
 import { CategoryService } from './category/category.service';
 import { CategoryModule } from './category/category.module';
+import { GraphQLModule } from '@nestjs/graphql';
+import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
+import { join } from 'path';
 // provide controllers in module
 @Module({
   imports: [TypeOrmModule.forRoot({
@@ -21,7 +24,12 @@ import { CategoryModule } from './category/category.module';
     database: 'test_db_nestjs',
     entities: [Product, Category],
     synchronize: true,
-  }), ProductsModule, CategoryModule],
+  }),
+  GraphQLModule.forRoot<ApolloDriverConfig>({
+    driver: ApolloDriver,
+    autoSchemaFile: join(process.cwd(), 'src/schema.gql'),
+  }),
+  ProductsModule, CategoryModule],
   controllers: [AppController],
   providers: [AppService],
 })

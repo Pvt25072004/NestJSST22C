@@ -8,6 +8,14 @@ export class CategoryService {
     constructor(
         @InjectRepository(Category)
         private categoryRepository: Repository<Category>, ){};
+
+    getAll() {
+        return this.categoryRepository.find({
+            relations: {
+            products: true,
+            },
+        });
+        }
     getOneById(id: number){
         return this.categoryRepository.findOne({
             where: {id},
