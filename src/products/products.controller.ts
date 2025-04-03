@@ -1,7 +1,8 @@
 import { CategoryService } from './../category/category.service';
-import { Body, Controller, Delete, Get, Param, ParseIntPipe, Post, Put, Render } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, ParseIntPipe, Post, Put, Render, Req, UseGuards } from '@nestjs/common';
 import { ProductsService } from './products.service';
 import { ProductDTO } from './productDTO';
+import { AuthGuard } from 'src/authen/authen.guard';
 
 // export interface ProductParams {
 //   name: string;
@@ -13,8 +14,10 @@ import { ProductDTO } from './productDTO';
 export class ProductsController {
 
   constructor(private productService: ProductsService, private categoryService: CategoryService){}
+  @UseGuards(AuthGuard)
   @Get('')
-  async index(){
+  async index(@Req() req:Request){
+    console.log(req)
     // const category = await this.categoryService.getOne;
     const products = await this.productService.getAll()
     return { message: 'Get success data!!!', data: products };

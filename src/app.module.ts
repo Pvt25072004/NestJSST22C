@@ -13,6 +13,9 @@ import { CategoryModule } from './category/category.module';
 import { GraphQLModule } from '@nestjs/graphql';
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 import { join } from 'path';
+import { AuthenController } from './authen/authen.controller';
+import { AuthenService } from './authen/authen.service';
+import { AuthenModule } from './authen/authen.module';
 // provide controllers in module
 @Module({
   imports: [TypeOrmModule.forRoot({
@@ -29,8 +32,8 @@ import { join } from 'path';
     driver: ApolloDriver,
     autoSchemaFile: join(process.cwd(), 'src/schema.gql'),
   }),
-  ProductsModule, CategoryModule],
-  controllers: [AppController],
-  providers: [AppService],
+  ProductsModule, CategoryModule, AuthenModule],
+  controllers: [AppController, ],
+  providers: [AppService, ],
 })
 export class AppModule {}

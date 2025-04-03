@@ -1,6 +1,6 @@
 import { UserDTO } from './userDTO';
 import { UsersService } from './users.service';
-import { Controller, Get, Put } from '@nestjs/common';
+import { Controller, Get, Post, Put } from '@nestjs/common';
 
 @Controller('/users')
 export class UsersController {
@@ -22,5 +22,5 @@ export class UsersController {
       const displayUser = await this.usersService.getAll();
       return { message: 'Create new user success!!!' , displayUser};
     }
-    
+
 }
