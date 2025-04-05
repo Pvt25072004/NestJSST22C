@@ -18,7 +18,7 @@ export class ProductsService {
             category: true,
             },
         });
-        }
+    }
     // getAll():Promise <Product[]>{
     //     return this.productRepository.find();
     // }

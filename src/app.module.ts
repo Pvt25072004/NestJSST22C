@@ -16,6 +16,12 @@ import { join } from 'path';
 import { AuthenController } from './authen/authen.controller';
 import { AuthenService } from './authen/authen.service';
 import { AuthenModule } from './authen/authen.module';
+import { EmployeeController } from './employee/employee.controller';
+import { EmployeeModule } from './employee/employee.module';
+import { DepartmentController } from './department/department.controller';
+import { DepartmentModule } from './department/department.module';
+import { Employee } from './employee/employee.entity';
+import { Department } from './department/department.entity';
 // provide controllers in module
 @Module({
   imports: [TypeOrmModule.forRoot({
@@ -25,15 +31,15 @@ import { AuthenModule } from './authen/authen.module';
     username: 'root',
     password: 'Pvt@2507',
     database: 'test_db_nestjs',
-    entities: [Product, Category],
+    entities: [Product, Category, Employee, Department],
     synchronize: true,
   }),
   GraphQLModule.forRoot<ApolloDriverConfig>({
     driver: ApolloDriver,
     autoSchemaFile: join(process.cwd(), 'src/schema.gql'),
   }),
-  ProductsModule, CategoryModule, AuthenModule],
-  controllers: [AppController, ],
+  ProductsModule, CategoryModule, AuthenModule, EmployeeModule, DepartmentModule],
+  controllers: [AppController,],
   providers: [AppService, ],
 })
 export class AppModule {}

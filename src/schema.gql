@@ -18,11 +18,29 @@ type Product {
   category: Category!
 }
 
+type Department {
+  id: Int!
+  name: String!
+  location: String!
+  employees: [Employee!]!
+}
+
+type Employee {
+  id: Int!
+  name: String!
+  email: String!
+  salary: Float!
+  position: String!
+  department: Department!
+}
+
 type Query {
   getAllProducts: [Product!]!
   getProductById(id: Float!): Product!
   getAllCategory: [Category!]!
   getCategoryById(id: Float!): Category!
+  getAllEmployees: [Employee!]!
+  getAllDepartment: [Department!]!
 }
 
 type Mutation {
@@ -32,4 +50,8 @@ type Mutation {
   createCategory(name: String!, description: String!): Category!
   deleteCategory(id: Float!): Category!
   updateCategory(id: Float!, name: String!, description: String!): Category!
+  createEmployee(name: String!, email: String!, salary: Float!, position: String!): Employee!
+  updateEmployee(id: Float!, name: String!, email: String!, salary: Float!, position: String!): Employee!
+  createDepartment(name: String!, location: String!): Department!
+  updateDepartment(id: Float!, name: String!, location: String!): Department!
 }
