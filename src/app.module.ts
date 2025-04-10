@@ -22,9 +22,33 @@ import { DepartmentController } from './department/department.controller';
 import { DepartmentModule } from './department/department.module';
 import { Employee } from './employee/employee.entity';
 import { Department } from './department/department.entity';
+import { MailerModule } from '@nestjs-modules/mailer';
+import { EjsAdapter } from '@nestjs-modules/mailer/dist/adapters/ejs.adapter';
 // provide controllers in module
 @Module({
-  imports: [TypeOrmModule.forRoot({
+  imports: [
+    MailerModule.forRoot({
+      transport: {
+        host: 'smtp.gmail.com',
+        port: 465,
+        secure: true,
+        auth: {
+          user: 'phamtienlq955@gmail.com',
+          pass: 'seccdfumqzjqouuj',
+        },
+      },
+      defaults: {
+        from: '"Your App" <your-email@gmail.com>',
+      },
+      template: {
+        dir: join(__dirname, 'templates'), // Thư mục chứa file .ejs
+        adapter: new EjsAdapter(), // Adapter cho EJS
+        options: {
+          strict: false,
+        },
+      },
+    }),
+    TypeOrmModule.forRoot({
     type: 'mysql',
     host: 'localhost',
     port: 3306,
