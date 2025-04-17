@@ -24,9 +24,13 @@ import { Employee } from './employee/employee.entity';
 import { Department } from './department/department.entity';
 import { MailerModule } from '@nestjs-modules/mailer';
 import { EjsAdapter } from '@nestjs-modules/mailer/dist/adapters/ejs.adapter';
+import { ScheduleModule } from '@nestjs/schedule';
+import { ScheduleService } from './schedule/schedule.service';
+import { ChatAppGateway } from './chat-app/chat-app.gateway';
 // provide controllers in module
 @Module({
   imports: [
+    ScheduleModule.forRoot(),
     MailerModule.forRoot({
       transport: {
         host: 'smtp.gmail.com',
@@ -64,6 +68,6 @@ import { EjsAdapter } from '@nestjs-modules/mailer/dist/adapters/ejs.adapter';
   }),
   ProductsModule, CategoryModule, AuthenModule, EmployeeModule, DepartmentModule],
   controllers: [AppController,],
-  providers: [AppService, ],
+  providers: [AppService, ScheduleService, ChatAppGateway, ],
 })
 export class AppModule {}
